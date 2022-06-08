@@ -1,6 +1,7 @@
 from __future__ import print_function
 
-import os
+import argparse
+import sys
 import os.path
 
 from google.auth.transport.requests import Request
@@ -16,12 +17,12 @@ SCOPES = ['https://www.googleapis.com/auth/drive']
 def get_arg_parser():
     """Creates argument parser object"""
     parser = argparse.ArgumentParser(description='Process some integers.')
-    parser.add_argument('source', metavar='S', type=int, nargs='+',
+    parser.add_argument('source', metavar='S', type=str,
                         help='UID of the source directory')
-    parser.add_argument('destination', metavar='D', type=int, nargs='+',
+    parser.add_argument('destination', metavar='D', type=str, 
                         help='UID of the destination directory')
     parser.add_argument('--token', default='./token.json',
-                        help='path to token.json generated automatically in the first run (default: "./token.json") []')
+                        help='path to token.json generated automatically in the first run (default: "./token.json")')
     parser.add_argument('--cred', default='./credentials.json',
                         help='path to credentials.json obtained from GCP Console (default: "./credentials.json") [FMI see bit.ly/credjson]')
 
@@ -35,12 +36,12 @@ def main():
 
     # parse cli args
     parser = get_arg_parser()
-    parser.parse_args(os.argv)
+    args = parser.parse_args(sys.argv[1:])
 
-    token_json_path = parser.token
-    root_src_dir = parser.source
-    root_dst_dir = parser.dest
-    cred_json_path = parser.cred
+    root_src_dir = args.source
+    root_dst_dir = args.destination
+    cred_json_path = args.cred
+    token_json_path = args.token
 
     creds = None
     # The file token.json stores the user's access and refresh tokens, and is
@@ -147,9 +148,6 @@ def main():
         iter_copy(src_dir, dst_dir)
 
         print('copied', len(all_copied), 'files')
-
-        from IPython import embed
-        embed()
 
     except HttpError as error:
         # TODO(developer) - Handle errors from drive API.
