@@ -1,5 +1,13 @@
 # GDrive Deep Copy
 
+<a href="https://github.com/blackvvine/drive-deep-copy/stargazers"><img src="https://img.shields.io/github/stars/blackvvine/drive-deep-copy" alt="Stars Badge"/></a>
+<a href="https://github.com/blackvvine/drive-deep-copy/network/members"><img src="https://img.shields.io/github/forks/blackvvine/drive-deep-copy" alt="Forks Badge"/></a>
+<a href="https://github.com/blackvvine/drive-deep-copy/pulls"><img src="https://img.shields.io/github/issues-pr/blackvvine/drive-deep-copy" alt="Pull Requests Badge"/></a>
+<a href="https://github.com/blackvvine/drive-deep-copy/issues"><img src="https://img.shields.io/github/issues/blackvvine/drive-deep-copy" alt="Issues Badge"/></a>
+<a href="https://github.com/blackvvine/drive-deep-copy/graphs/contributors"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/blackvvine/drive-deep-copy?color=2b9348"></a>
+<a href="https://github.com/blackvvine/drive-deep-copy/blob/master/LICENSE"><img src="https://img.shields.io/github/license/blackvvine/drive-deep-copy?color=2b9348" alt="License Badge"/></a>
+
+
 A tiny recursive directory copy script for Google Drive
 
 ## Why
