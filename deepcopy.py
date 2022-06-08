@@ -25,6 +25,8 @@ def get_arg_parser():
                         help='path to token.json generated automatically in the first run (default: "./token.json")')
     parser.add_argument('--cred', default='./credentials.json',
                         help='path to credentials.json obtained from GCP Console (default: "./credentials.json") [FMI see bit.ly/credjson]')
+    parser.add_argument('--prefix', default='deepcopyv1__',
+            help='Prefix prepended to all copied files for easier lookup [default: "deepcopyv1__"]')
 
     return parser
 
@@ -42,6 +44,7 @@ def main():
     root_dst_dir = args.destination
     cred_json_path = args.cred
     token_json_path = args.token
+    file_prefix = args.prefix
 
     creds = None
     # The file token.json stores the user's access and refresh tokens, and is
@@ -93,7 +96,7 @@ def main():
             print(f"{prefix} {len(out)} items listed in {dir_['name']}")
             return out
 
-        def copy_file(file_, dst_dir, file_prefix="test__"):
+        def copy_file(file_, dst_dir, file_prefix=file_prefix):
             try:
                 newfile = {'name': file_prefix + file_['name'], 'parents': [dst_dir['id']]}
                 res = service.files().copy(fileId=file_['id'], body=newfile, **kwargs).execute()
@@ -137,7 +140,7 @@ def main():
 
                     else:
                         print(f'{prefix + "##"} copying {src_dir["name"]}/{f["name"]} to {dst_dir["name"]}/')
-                        copy_file(f, dst_dir, file_prefix='test__F3CD363F__v2__')
+                        copy_file(f, dst_dir, file_prefix=file_prefix)
 
                 if not extra:
                     break
